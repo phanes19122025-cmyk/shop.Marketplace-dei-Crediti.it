@@ -28,24 +28,7 @@ export const Orders: CollectionConfig = {
         return data
       },
     ],
-    afterChange: [
-      async ({ doc, previousDoc, req, operation }) => {
-        if (operation !== 'update') return doc
-        if (doc.status === 'paid' && previousDoc?.status !== 'paid') {
-          for (const item of doc.items || []) {
-            try {
-              await req.payload.db.drizzle.execute(
-                `UPDATE products SET stock = stock - $1 WHERE id = $2 AND stock >= $1`,
-                [item.quantity, item.product],
-              )
-            } catch (err) {
-              req.payload.logger.error({ err, item }, 'stock decrement failed')
-            }
-          }
-        }
-        return doc
-      },
-    ],
+    // TODO v0.3: atomic stock decrement on status=paid via drizzle sql template
   },
   fields: [
     { name: 'orderNumber', type: 'text', required: true, unique: true, admin: { readOnly: true, position: 'sidebar' } },
