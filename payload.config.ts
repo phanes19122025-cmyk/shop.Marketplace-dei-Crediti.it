@@ -38,7 +38,10 @@ export default buildConfig({
   editor: lexicalEditor(),
   secret: requireSecret(),
   typescript: { outputFile: path.resolve(dirname, 'src/payload-types.ts') },
-  db: postgresAdapter({ pool: { connectionString: process.env.DATABASE_URI || '' } }),
+  db: postgresAdapter({
+    pool: { connectionString: process.env.DATABASE_URI || '' },
+    push: true, // v0.2 alpha: auto-sync schema on boot. Switch to migrations for v0.3+ prod.
+  }),
   sharp,
   plugins: r2Enabled
     ? [
