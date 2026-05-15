@@ -3,10 +3,15 @@ import type { Metadata } from 'next'
 import { generatePageMetadata, NotFoundPage } from '@payloadcms/next/views'
 import config from '@payload-config'
 
-type Args = { params: Promise<{ segments: string[] }> }
+type Args = {
+  params: Promise<{ segments: string[] }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
 
-export const generateMetadata = ({ params }: Args): Promise<Metadata> =>
-  generatePageMetadata({ config, params })
+export const generateMetadata = ({ params, searchParams }: Args): Promise<Metadata> =>
+  generatePageMetadata({ config, params, searchParams })
 
-const NotFound = ({ params }: Args) => NotFoundPage({ config, params })
+const NotFound = ({ params, searchParams }: Args) =>
+  NotFoundPage({ config, params, searchParams })
+
 export default NotFound
