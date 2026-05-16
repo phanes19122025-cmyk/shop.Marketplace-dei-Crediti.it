@@ -88,3 +88,4 @@ src/
 
 MIT
 \n_Deploy pipeline verified 2026-05-16T13:01Z_
+\n_Deploy pipeline verified 2026-05-16T13:01Z_\n
