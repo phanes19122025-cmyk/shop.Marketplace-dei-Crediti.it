@@ -1,0 +1,12 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "regions": ["fra1"],
+  "buildCommand": "next build",
+  "installCommand": "npm install --legacy-peer-deps",
+  "outputDirectory": ".next",
+  "functions": {
+    "src/app/**/*.{ts,tsx}": { "maxDuration": 60 }
+  },
+  "github": { "enabled": true, "autoAlias": true }
+}
