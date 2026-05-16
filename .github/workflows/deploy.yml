@@ -21,10 +21,10 @@ jobs:
         run: npm i -g vercel@latest
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Load env into runner shell
+      - name: Export env vars to GITHUB_ENV
         run: |
           if [ -f .vercel/.env.production.local ]; then
-            cat .vercel/.env.production.local >> $GITHUB_ENV
+            grep -E '^[A-Za-z_][A-Za-z0-9_]*=' .vercel/.env.production.local >> "$GITHUB_ENV" || true
           fi
       - name: Build with Vercel
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
