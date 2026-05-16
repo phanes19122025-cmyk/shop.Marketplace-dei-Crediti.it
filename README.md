@@ -88,4 +88,4 @@ src/
 
 MIT
 \n_Deploy pipeline verified 2026-05-16T13:01Z_
-\n_Deploy pipeline verified 2026-05-16T13:01Z_\n
+\n_Deploy pipeline verified 2026-05-16T13:01Z_\n\n## Status (live)\n\n- Admin: https://shop-mdc.onrender.com/admin\n- Storefront: https://shop-mdc.onrender.com\n- Auto-deploy: GitHub Actions → Render API on push to main\n\nLast verified: 2026-05-16T13:01:44Z\n
