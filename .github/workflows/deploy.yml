@@ -21,11 +21,12 @@ jobs:
         run: npm i -g vercel@latest
       - name: Pull Vercel environment
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Load env into runner shell
+        run: |
+          if [ -f .vercel/.env.production.local ]; then
+            cat .vercel/.env.production.local >> $GITHUB_ENV
+          fi
       - name: Build with Vercel
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
       - name: Deploy prebuilt artifact to production
-        id: deploy
-        run: |
-          URL=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
-          echo "url=$URL" >> $GITHUB_OUTPUT
-          echo "Deployed: $URL"
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
